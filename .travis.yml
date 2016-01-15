@@ -5,7 +5,19 @@ node_js:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm install grunt-cli
+  - npm install -g karma
+  - npm install -g grunt-cli
+  - npm install -g bower
   - bower install
+  - ./nodeserver.sh > /dev/null &
 
-script: "gulp test"
+script:
+  - grunt integrate
+
+sudo: false
+
+git:
+  depth: 10
+
+notifications:
+  slack: angularbuddies:b6leQM9gkBCW0S7MNDsELpqU
